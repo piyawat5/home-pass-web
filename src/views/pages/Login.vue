@@ -93,7 +93,7 @@ const forgetPassword = () => {
                 </div>
             </form>
             <div class="flex justify-center mt-4">
-                <GoogleLogin class="w-full" :callback="handleGoogleLogin" />
+                <GoogleLogin :auto-login="false" :one-tap="false" class="w-full" :callback="handleGoogleLogin" />
             </div>
         </div>
     </div>
