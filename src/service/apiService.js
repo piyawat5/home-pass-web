@@ -3,7 +3,7 @@ import { useAuthStore } from '@/stores/auth';
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://www.family-sivarom.com/',
+    baseURL: 'https://www.family-sivarom.com/',
     withCredentials: true // ส่ง cookie jid ไปด้วย (ใช้ตอน refresh)
 });
 
