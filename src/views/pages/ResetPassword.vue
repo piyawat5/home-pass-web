@@ -66,4 +66,8 @@ async function onResetPassword() {
     background: linear-gradient(90deg, #ff6b6b 0%, #feca57 100%);
     border: none;
 }
+
+#container-div {
+    width: 100%;
+}
 </style>

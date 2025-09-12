@@ -76,7 +76,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex justify-center md:items-center md:min-h-[100vh] animate-fade-right">
+    <div class="flex justify-center md:items-center mt-[100px] md:mt-0 md:min-h-[100vh] animate-fade-right">
         <div class="card w-full max-w-[400px]">
             <div class="text-xl md:text-2xl font-semibold mb-8">{{ !isRegister ? 'รีเซ็ต Password ' : '' }}กรุณายืนยันตัวตนด้วย OTP</div>
 

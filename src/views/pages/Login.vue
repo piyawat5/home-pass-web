@@ -65,7 +65,7 @@ const forgetPassword = () => {
 </script>
 
 <template>
-    <div class="animate-fade-right flex justify-center md:items-center md:min-h-[100vh]">
+    <div class="animate-fade-right flex mt-[100px] md:mt-0 justify-center md:items-center md:min-h-[100vh]">
         <div class="card w-full max-w-[400px]">
             <div class="text-xl md:text-2xl font-semibold mb-8">เข้าสู่ระบบ</div>
 
@@ -92,7 +92,7 @@ const forgetPassword = () => {
                     </div>
                 </div>
             </form>
-            <div class="flex justify-center mt-4">
+            <div class="w-full flex justify-center mt-4">
                 <GoogleLogin :auto-login="false" :one-tap="false" class="w-full" :callback="handleGoogleLogin" />
             </div>
         </div>
