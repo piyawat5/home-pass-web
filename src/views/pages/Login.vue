@@ -93,7 +93,23 @@ const forgetPassword = () => {
                 </div>
             </form>
             <div class="w-full flex justify-center mt-4">
-                <GoogleLogin :auto-login="false" :one-tap="false" class="w-full" :callback="handleGoogleLogin" />
+                <!-- <GoogleLogin :auto-login="false" :one-tap="false" class="w-full" :callback="handleGoogleLogin" /> -->
+
+                <GoogleLogin
+                    :auto-login="false"
+                    :one-tap="false"
+                    class="w-full"
+                    :callback="handleGoogleLogin"
+                    :button-config="{
+                        type: 'standard',
+                        theme: 'filled_blue',
+                        size: 'large',
+                        text: 'signin_with',
+                        shape: 'rectangular',
+                        logo_alignment: 'left',
+                        width: '100%'
+                    }"
+                />
             </div>
         </div>
     </div>
