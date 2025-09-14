@@ -1,8 +1,9 @@
 <script setup>
 import SystemItem from '@/components/SystemItem.vue';
+import api from '@/service/apiService';
 import { useAuthStore } from '@/stores/auth';
 import { useToast } from 'primevue/usetoast';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -20,6 +21,21 @@ const systemList = ref([
         url: 'https://www.google.com'
     }
 ]);
+
+const checkVerify = async () => {
+    isLoading.value = true;
+    try {
+        await api.post('auth/verify');
+        isLoading.value = false;
+    } catch (error) {
+        console.log(error);
+        isLoading.value = false;
+    }
+};
+
+onMounted(() => {
+    checkVerify();
+});
 </script>
 
 <template>

@@ -2,13 +2,14 @@
 import api from '@/service/apiService';
 import { useAuthStore } from '@/stores/auth';
 import { useToast } from 'primevue/usetoast';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { GoogleLogin } from 'vue3-google-login';
 
 const router = useRouter();
 const toast = useToast();
 const authStore = useAuthStore();
+const isInWebView = ref(false);
+const userAgent = ref('');
 
 const loginForm = ref({
     email: '',
@@ -62,6 +63,32 @@ const forgetPassword = () => {
     });
     // router.push({ name: 'verifyOTP', query: { action: 'forgetPassword', email: loginForm.value.email } });
 };
+
+const loginGoogle = () => {
+    window.location.href = 'https://family-sivarom.com/auth/google';
+};
+
+onMounted(() => {
+    userAgent.value = navigator.userAgent;
+    isInWebView.value = /Line|WebView|wv/.test(navigator.userAgent);
+});
+
+const openInBrowser = () => {
+    const currentUrl = window.location.href;
+
+    if (/iPhone|iPad/i.test(navigator.userAgent)) {
+        // iOS - ลองหลายวิธี
+        window.location.href = currentUrl.replace(/^https?:\/\//, 'x-safari-https://');
+        // window.location.href = `x-web-search://?${encodeURIComponent(currentUrl)}`;
+    } else if (/Android/i.test(navigator.userAgent)) {
+        // Android - ใช้ Intent
+        const intent = `intent://${currentUrl.replace(/https?:\/\//, '')}#Intent;scheme=https;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(currentUrl)};end`;
+        window.location.href = intent;
+    } else {
+        // Fallback
+        window.open(currentUrl, '_blank');
+    }
+};
 </script>
 
 <template>
@@ -93,24 +120,21 @@ const forgetPassword = () => {
                 </div>
             </form>
             <div class="w-full flex justify-center mt-4">
-                <!-- <GoogleLogin :auto-login="false" :one-tap="false" class="w-full" :callback="handleGoogleLogin" /> -->
-
-                <GoogleLogin
-                    :auto-login="false"
-                    :one-tap="false"
-                    class="w-full"
-                    :callback="handleGoogleLogin"
-                    :button-config="{
-                        type: 'standard',
-                        theme: 'filled_blue',
-                        size: 'large',
-                        text: 'signin_with',
-                        shape: 'rectangular',
-                        logo_alignment: 'left',
-                        width: '100%'
-                    }"
-                />
+                <!-- <button @click="loginGoogle" class="w-full">Login with Google</button> -->
+                <!-- :auto-login="false" :one-tap="false" -->
+                <button class="w-full" @click="openInBrowser" v-if="isInWebView" style="background: red; border-radius: 6px; color: white; padding: 10px">
+                    <i class="pi pi-google ml-3"></i>
+                    เปิด browser เพื่อลงชื่อเข้าใช้ด้วย GOOGLE
+                </button>
+                <GoogleLogin v-else ux_mode="popup" class="w-full" :callback="handleGoogleLogin" />
             </div>
+
+            <!-- Debug info เพื่อดูก่อน -->
+            <!-- <p>UserAgent: {{ userAgent }}</p>
+            <p>Is WebView: {{ isInWebView }}</p> -->
+
+            <!-- ปุ่มที่จะแสดงเฉพาะใน WebView -->
+            <!-- <button @click="openInBrowser" v-if="isInWebView" style="background: red; color: white; padding: 10px">WebView Button - คุณอยู่ใน WebView!</button> -->
         </div>
     </div>
 </template>

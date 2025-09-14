@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const api = axios.create({
     baseURL: 'https://www.family-sivarom.com/',
-    withCredentials: true // ส่ง cookie jid ไปด้วย (ใช้ตอน refresh)
+    withCredentials: true
 });
 
 let onError;
@@ -37,8 +37,15 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                // ยิง refresh → backend จะอ่าน cookie.jid เอง
-                const res = await api.post('/auth/refresh');
+                // 🔥 ใช้ axios แยก แทนที่จะใช้ api → ไม่ผ่าน interceptor
+                const res = await axios.post(
+                    'https://www.family-sivarom.com/auth/refreshToken',
+                    {},
+                    {
+                        withCredentials: true
+                    }
+                );
+
                 const authStore = useAuthStore();
 
                 // เก็บ token ใหม่ใน store
@@ -51,7 +58,7 @@ api.interceptors.response.use(
                 // ถ้า refresh fail → logout
                 const authStore = useAuthStore();
                 authStore.logout();
-                window.location.href = '/';
+                console.log('Refresh token failed:', err.response?.status);
             }
         }
 
