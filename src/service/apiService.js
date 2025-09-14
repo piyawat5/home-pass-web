@@ -58,7 +58,7 @@ api.interceptors.response.use(
                 // ถ้า refresh fail → logout
                 const authStore = useAuthStore();
                 authStore.logout();
-                console.log('Refresh token failed:', err.response?.status);
+                window.location.href = '/';
             }
         }
 
