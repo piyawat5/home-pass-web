@@ -4,7 +4,7 @@ import api from '@/service/apiService';
 import { useAuthStore } from '@/stores/auth';
 import { useConfirm } from 'primevue/useconfirm';
 import { useToast } from 'primevue/usetoast';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
@@ -14,9 +14,9 @@ const isLoading = ref(false);
 const confirm = useConfirm();
 const toast = useToast();
 
-onMounted(() => {
-    authStore.loadAuth();
-});
+// onMounted(() => {
+//     authStore.loadAuth();
+// });
 
 const confirmLogout = () => {
     confirm.require({

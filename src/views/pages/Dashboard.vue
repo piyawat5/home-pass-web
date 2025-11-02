@@ -18,7 +18,7 @@ const systemList = ref([
         nameEng: 'Maintenance And Inventory Management',
         bgColor: '#D4ECFF',
         borderColor: '#83B7FF',
-        url: 'https://www.google.com'
+        url: 'https://ma.family-sivarom.com/bypasslogin/'
     }
 ]);
 
