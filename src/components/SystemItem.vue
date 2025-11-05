@@ -20,7 +20,7 @@ const accessSystem = async () => {
     isLoading.value = true;
     try {
         const res = await api.post('/access/system', {
-            system: 'MA',
+            system: data.value.shortName,
             user: authStore.user,
             apiKey: import.meta.env.VITE_API_KEY
         });
@@ -35,24 +35,36 @@ const accessSystem = async () => {
         isLoading.value = false;
     }
 };
-
-onMounted(() => {
-    console.log(42);
-});
 </script>
 
 <template>
-    <div class="w-full rounded-xl p-2" :style="{ backgroundColor: data?.bgColor, border: `1px solid ${data?.borderColor}` }" @click="accessSystem">
-        <div class="font-bold text-xl">
-            {{ data.shortName }}
-        </div>
-        <div class="">
-            {{ data.nameEng }}
-        </div>
-        <div class="">
-            {{ data.nameTh }}
+    <div
+        class="shadow-container w-full rounded-xl p-2 bg-[var(--bg-color)] dark:bg-[var(--bg-color-dark)]"
+        :style="{
+            '--bg-color': data?.bgColor,
+            '--bg-color-dark': data?.borderColor
+        }"
+        @click="accessSystem"
+    >
+        <div class="flex gap-3 items-center">
+            <img style="position: relative; top: -25px; left: -5px" width="60px" :src="`/demo/images/${data.shortName}.png`" alt="" />
+            <div class="">
+                <div class="flex gap-1 items-center">
+                    <div class="font-bold text-xl">
+                        {{ data.shortName }}
+                    </div>
+                    <div class="text-sm truncate w-[150px]">({{ data.nameEng }})</div>
+                </div>
+                <div class="text-sm">
+                    {{ data.nameTh }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.shadow-container {
+    box-shadow: 0.5px 2px 12px 0px rgba(0, 0, 0, 0.25);
+}
+</style>
