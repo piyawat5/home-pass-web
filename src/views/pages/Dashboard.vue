@@ -18,7 +18,8 @@ const systemList = ref([
         nameEng: 'Approve Online',
         bgColor: '#FFF4B4',
         borderColor: 'rgba(255, 191, 0, 0.3)',
-        url: 'https://app.family-sivarom.com/bypasslogin/'
+        url: 'https://app.family-sivarom.com/bypasslogin/',
+        delay: '200'
     },
     {
         shortName: 'MA',
@@ -26,7 +27,8 @@ const systemList = ref([
         nameEng: 'Maintenance System',
         bgColor: '#D4ECFF',
         borderColor: 'rgba(0, 106, 255, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '400'
     },
     {
         shortName: 'AC',
@@ -34,7 +36,8 @@ const systemList = ref([
         nameEng: 'Activity Management System',
         bgColor: '#FFC5B6',
         borderColor: 'rgba(255, 0, 0, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '600'
     },
     {
         shortName: 'FAC',
@@ -42,7 +45,8 @@ const systemList = ref([
         nameEng: 'Financial Accounting Center',
         bgColor: '#CEFFE7',
         borderColor: 'rgba(0, 246, 119, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '800'
     },
     {
         shortName: 'NEWS',
@@ -50,7 +54,8 @@ const systemList = ref([
         nameEng: 'News Management System',
         bgColor: '#D6C3FF',
         borderColor: 'rgba(85, 0, 255, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '1000'
     },
     {
         shortName: 'INS',
@@ -58,7 +63,8 @@ const systemList = ref([
         nameEng: 'Inventory and Shift System',
         bgColor: '#FEBEF9',
         borderColor: 'rgba(255, 0, 246, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '1200'
     },
     {
         shortName: 'HMS',
@@ -66,7 +72,8 @@ const systemList = ref([
         nameEng: 'Healthy Management System',
         bgColor: '#BEFFB6',
         borderColor: 'rgba(22, 188, 0, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '1400'
     },
     {
         shortName: 'PET',
@@ -74,7 +81,8 @@ const systemList = ref([
         nameEng: 'Pet Management System',
         bgColor: '#DCDCDC',
         borderColor: '',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '1600'
     },
     {
         shortName: 'UNI',
@@ -82,7 +90,8 @@ const systemList = ref([
         nameEng: 'N’Unique System',
         bgColor: '#FFD6B7',
         borderColor: 'rgba(255, 119, 0, 0.3)',
-        url: 'https://ma.family-sivarom.com/bypasslogin/'
+        url: 'https://ma.family-sivarom.com/bypasslogin/',
+        delay: '1800'
     }
 ]);
 
@@ -106,7 +115,15 @@ onMounted(() => {
     <div class="animate-fade-up card mt-[100px] min-h-[100vh]">
         <div class="font-bold text-xl">เลือกระบบ</div>
         <div class="mt-8 grid grid-cols-12 gap-6">
-            <SystemItem v-for="(system, index) in systemList" :key="index" v-model="systemList[index]" class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 2xl:col-span-2"> </SystemItem>
+            <SystemItem
+                :style="{ animationDelay: `${system.delay}ms` }"
+                v-for="(system, index) in systemList"
+                :key="index"
+                v-model="systemList[index]"
+                :class="`animate-fade-up`"
+                class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 2xl:col-span-2"
+            >
+            </SystemItem>
         </div>
     </div>
 </template>
